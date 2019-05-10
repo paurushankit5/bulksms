@@ -20,13 +20,13 @@
 				LINES TERMINATED BY '\\n'
 			";
 
-			 echo $sql2."<br>";
-			 exit;
+			
 			if(!mysqli_query($con,$sql2)){
 				echo mysqli_error($con);
 			}
 			$files[] = $new_file;
-			
+			echo $sql2."<br>";
+			 exit;
 			//exit;
 		}
 		if(count($files))
