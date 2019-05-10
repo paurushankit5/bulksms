@@ -20,8 +20,8 @@
 				LINES TERMINATED BY '\\n'
 			";
 
-			// echo $sql2."<br>";
-			// exit;
+			 echo $sql2."<br>";
+			 exit;
 			if(!mysqli_query($con,$sql2)){
 				echo mysqli_error($con);
 			}
