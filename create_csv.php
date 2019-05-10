@@ -23,7 +23,7 @@
 	</select>
 	<br>
 
-	<textarea placeholder="Enter Your message here" required rows="6" name="msg"></textarea>
+	<textarea placeholder="Enter Your message here" required rows="6" cols="52" name="msg"></textarea>
 	<br>
 	<input type="submit">
 </form>

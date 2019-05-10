@@ -1,5 +1,7 @@
 
 <?php
+	ini_set('memory_limit', '-1');
+	ini_set('max_execution_time', 0);
 	include('config.php');
 	if(isset($_POST['file_name']))
 	{
@@ -11,15 +13,18 @@
 		{
 			$new_file = rand(1111,999999).strtotime(date('Y-m-d H:i:s')).".csv";
 
-			$sql2 = "select mobile, CONCAT('Hello ', fm_name_e , '. ' , '$msg', ' Please click on the link below to find your details. ','$base_url',id) as msg from bjp4 where file_name ='$file_name' limit $i,$result_limit 
+			$sql2 = "select mobile, CONCAT('Hello ', fm_name_e , '. ' , '$msg', ' Please click on the link below to find your details. ','$base_url',id) as msg from bjp4 where file_name ='$file_name' and mobile!='' limit $i,$result_limit 
 				INTO OUTFILE '$base_dir$new_file'
 				FIELDS TERMINATED BY ','
 				ENCLOSED BY '\"'
 				LINES TERMINATED BY '\\n'
 			";
 
-			//echo $sql2."<br>";
-			$b = mysqli_query($con,$sql2);
+			// echo $sql2."<br>";
+			// exit;
+			if(!mysqli_query($con,$sql2)){
+				echo mysqli_error($con);
+			}
 			$files[] = $new_file;
 			
 			//exit;

@@ -38,7 +38,7 @@
         //echo $id;
         mysqli_set_charset($con,'utf8');
 
-        $row = mysqli_query($con,"select * from bjp3 where id= '$id'");
+        $row = mysqli_query($con,"select * from bjp4 where id= '$id'");
         $a = mysqli_fetch_assoc($row);
         ?>
           <br>
@@ -54,28 +54,21 @@
                     </tr>
                     <tr>
                       <th>Name</th>
-                      <th><?= $a['fm_name_en'] ?></th>
+                      <th><?= $a['fm_name_e'] ?></th>
                     </tr>
                     <tr>
-                      <th>Father's Name</th>
-                      <th><?= $a['rln_fm_nm_en'] ?></th>
+                      <th>Voter ID</th>
+                      <th><?= $a['idcard_no'] ?></th>
                     </tr>
                     <tr>
-                      <th>DOB</th>
-                      <th><?= date('d-M-Y', strtotime($a['dob'])) ?></th>
+                      <th>Part No</th>
+                      <th><?= $a['part_no']; ?></th>
                     </tr>
                     <tr>
-                      <th>Mobile</th>
-                      <th><?= $a['mobile'] ?></th>
+                      <th>Series No</th>
+                      <th><?= $a['slnoinpart'] ?></th>
                     </tr>
-                    <tr>
-                      <th>Booth No.</th>
-                      <th>26</th>
-                    </tr>
-                    <tr>
-                      <th>Booth No.</th>
-                      <th>Rohtak Haryana</th>
-                    </tr>
+                     
 
                 <?php   
               }

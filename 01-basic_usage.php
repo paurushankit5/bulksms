@@ -13,6 +13,7 @@ ini_set('max_execution_time', 0);
 
 require_once __DIR__.'/SimpleXLSX.php';
 require_once __DIR__.'/config.php';
+$files = array();
 if ($handle = opendir('./upload')) {
 
     while (false !== ($entry = readdir($handle))) {
@@ -29,9 +30,6 @@ if ($handle = opendir('./upload')) {
 $files_in = "'".implode("','",$files)."'";
 $sql = "select distinct file_name from bjp4 where file_name in ($files_in)";
 $row = mysqli_query($con,$sql);
-//echo $sql;
-//echo "<pre>";
-//print_r($files);
 $files_processed = array();
 while($a = mysqli_fetch_assoc($row))
 {
@@ -43,10 +41,10 @@ print_r($diff);
 //exit;
 if(count($diff))
 {
-	foreach($diff as $file_name)
+	foreach($diff as $file_name2)
 	{
-		echo "processing $file_name";
-		$file_name = "upload/".$file_name;
+		echo "processing $file_name2";
+		$file_name = "upload/".$file_name2;
 		if ( $xlsx = SimpleXLSX::parse($file_name) ) {
 			list( $cols, ) = $xlsx->dimension();
 			if(count($xlsx->rows()))
@@ -56,26 +54,18 @@ if(count($diff))
 				//print_r($xlsx->rows());
 				foreach ($xlsx->rows() as $row)
 				{
-					
 					if($i!=0)
 					 {
-						//print_r($row);
-						//echo "<pre>";
-					//print_r($row[29]);
 		 			
-					$sql = "insert into bjp4 (part_no, slnoinpart, fm_name_e, idcard_no, mobile, file_name) values('$row[0]', '$row[1]', '$row[10]', '$row[7]',  '$row[29]','$file_name')";
+					$sql = "insert into bjp4 (part_no, slnoinpart, fm_name_e, idcard_no, mobile, file_name) values('$row[1]', '$row[2]', '$row[11]', '$row[8]',  '$row[30]','$file_name2')";
 						mysqli_set_charset($con,'utf8');
 						if(mysqli_query($con,$sql)){
-							echo $i;
+							echo $i.'\n';
 						}
 						else{
 							echo mysqli_error($con);
 							echo $sql;
 						}
-					 
-					//echo $sql;
-					 echo "<br>";
-					 echo "<br>";
 					}
 					$i++;
 				}
@@ -86,10 +76,7 @@ if(count($diff))
 	}
 }
 echo "done";
-
-
-
-	?>
+?>
 
 </body>
 </html>
