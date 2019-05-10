@@ -7,7 +7,7 @@
 <body>
 <?php
 	include('config.php');
-	$sql = "select distinct file_name from bjp4 order by id desc";
+	$sql = "select distinct file_name from bjp4 group by file_name order by file_name desc";
 	$row = mysqli_query($con,"$sql");
 ?>
 <form method="post" action="getcsv.php">
